@@ -7,22 +7,23 @@ namespace App.Scripts.Libs.UI.Panel.Manager
 {
     public class PanelManager
     {
-        private readonly List<IFactory<PanelController>> _factories;
+        private List<IFactory<PanelController>> _factories;
 
         private readonly List<PanelController> _activePanels = new();
-        
-        public PanelManager(List<IFactory<PanelController>> factories)
+
+        public void SetFactories(List<IFactory<PanelController>> factories)
         {
             _factories = factories;
         }
-
+        
         public TController GetPanel<TController>() where TController : PanelController
         {
-            foreach (var panel in _activePanels)
+            for (var i = _activePanels.Count - 1; i > 0; i--)
             {
+                var panel = _activePanels[i];
                 if (panel.GetType() != typeof(TController)) continue;
-                
-                return (TController)panel;
+
+                return (TController) panel;
             }
 
             return null;
@@ -42,16 +43,22 @@ namespace App.Scripts.Libs.UI.Panel.Manager
             return null;
         }
 
-        public void SetActive(PanelController panel)
+        public void AddActive(PanelController panel)
         {
+            if (_activePanels.Count != 0) _activePanels[^1].SetInteractable(false);
+            
             _activePanels.Add(panel);
         }
         
-        public PanelController GetActive()
+        public void RemoveActive(PanelController panel)
         {
-            return _activePanels.Count == 0 ? null : _activePanels[^1];
+            if (_activePanels.Count > 1 && _activePanels[^1] == panel)
+            {
+                _activePanels[^2].SetInteractable(true);
+            }
+            
+            _activePanels.Remove(panel);
         }
-
         public void DestroyAll()
         {
             while (_activePanels.Count > 0)

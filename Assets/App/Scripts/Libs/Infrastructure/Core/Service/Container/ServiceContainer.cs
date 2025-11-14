@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace App.Scripts.Libs.Infrastructure.Core.Service.Container
 {
@@ -17,7 +16,7 @@ namespace App.Scripts.Libs.Infrastructure.Core.Service.Container
         {
             var container = FindContainer<TBind>();
 
-            container.Add(value);
+            container.SetService(value);
         }
 
         public TBind GetService<TBind>()
@@ -25,13 +24,6 @@ namespace App.Scripts.Libs.Infrastructure.Core.Service.Container
             var container = FindContainer<TBind>();
 
             return container.GetService();
-        }
-
-        public IEnumerable<TBind> GetServices<TBind>()
-        {
-            var container = FindContainer<TBind>();
-
-            return container.GetServices();
         }
 
         private Container<T> FindContainer<T>()
@@ -48,21 +40,16 @@ namespace App.Scripts.Libs.Infrastructure.Core.Service.Container
 
         private class Container<TBind> : IServiceContainer
         {
-            private readonly List<TBind> _values = new();
+            private TBind _value;
 
-            public void Add(TBind value)
+            public void SetService(TBind value)
             {
-                _values.Add(value);
+                _value = value;
             }
 
             public TBind GetService()
             {
-                return _values.FirstOrDefault();
-            }
-
-            public IEnumerable<TBind> GetServices()
-            {
-                return _values;
+                return _value;
             }
         }
         

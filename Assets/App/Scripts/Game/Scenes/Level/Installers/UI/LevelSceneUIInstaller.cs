@@ -18,12 +18,14 @@ namespace App.Scripts.Game.Scenes.Level.Installers.UI
         {
             var uiCanvas = container.GetService<Canvas>();
 
+            var panelManager = new PanelManager();
+            
             var factoryList = new List<IFactory<PanelController>>
             {
-                new LevelPanelFactory(_levelPanelView, uiCanvas)
+                new LevelPanelFactory(_levelPanelView, uiCanvas, panelManager)
             };
-                
-            var panelManager = new PanelManager(factoryList);
+
+            panelManager.SetFactories(factoryList);
 
             container.SetServiceSelf(panelManager);
         }

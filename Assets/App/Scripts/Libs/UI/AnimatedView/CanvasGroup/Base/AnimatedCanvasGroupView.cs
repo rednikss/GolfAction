@@ -9,6 +9,8 @@ namespace App.Scripts.Libs.UI.AnimatedView.CanvasGroup.Base
     {
         [SerializeField] protected ConfigAnimation config;
 
+        public UnityEngine.CanvasGroup CanvasGroup;
+        
         protected Tween CurrentTween;
         
         public abstract UniTask ShowAnimated();

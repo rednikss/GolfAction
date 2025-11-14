@@ -18,7 +18,7 @@ namespace App.Scripts.Game.Scenes.Level.Starter
         {
             var panelFactory = _panelManager.GetFactory<LevelPanelFactory>();
             var panel = panelFactory.Create();
-            _panelManager.SetActive(panel);
+            _panelManager.AddActive(panel);
             
             await panel.ShowAnimated();
             

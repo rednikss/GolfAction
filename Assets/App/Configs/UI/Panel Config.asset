@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14926e376e3c47f394188bfdcc87ddee, type: 3}
   m_Name: Panel Config
   m_EditorClassIdentifier: 
-  duration: 2
-  inEase: 1
-  outEase: 1
+  duration: 1
+  inEase: 2
+  outEase: 3

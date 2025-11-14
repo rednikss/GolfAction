@@ -7,15 +7,13 @@ namespace App.Scripts.Libs.UI.AnimatedView.CanvasGroup.Fade
 {
     public class FadeCanvasGroupView : AnimatedCanvasGroupView
     {
-        [SerializeField] private UnityEngine.CanvasGroup _canvasGroup;
-
         public override async UniTask ShowAnimated()
         {
             CurrentTween.Kill();
             
             base.Show();
             
-            CurrentTween = _canvasGroup.DOFade(1, config.duration)
+            CurrentTween = CanvasGroup.DOFade(1, config.duration)
                 .SetEase(config.inEase)
                 .SetLink(gameObject);
             
@@ -26,7 +24,7 @@ namespace App.Scripts.Libs.UI.AnimatedView.CanvasGroup.Fade
         {
             CurrentTween.Kill();
 
-            CurrentTween = _canvasGroup.DOFade(0, config.duration)
+            CurrentTween = CanvasGroup.DOFade(0, config.duration)
                 .SetEase(config.outEase)
                 .SetLink(gameObject);
 
@@ -37,13 +35,13 @@ namespace App.Scripts.Libs.UI.AnimatedView.CanvasGroup.Fade
 
         public override void Show()
         {
-            _canvasGroup.alpha = 1;
+            CanvasGroup.alpha = 1;
             base.Show();
         }
         
         public override void Hide()
         {
-            _canvasGroup.alpha = 0;
+            CanvasGroup.alpha = 0;
             base.Hide();
         }
     }

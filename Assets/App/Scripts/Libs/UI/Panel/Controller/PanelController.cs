@@ -7,30 +7,16 @@ namespace App.Scripts.Libs.UI.Panel.Controller
     public abstract class PanelController
     {
         protected AnimatedCanvasGroupView GroupView;
-        
-        public UniTask ShowAnimated()
-        {
-            return GroupView.ShowAnimated();
-        }
 
-        public UniTask HideAnimated()
-        {
-            return GroupView.HideAnimated();
-        }
+        public void SetInteractable(bool value) => GroupView.CanvasGroup.interactable = value;
+        public UniTask ShowAnimated() => GroupView.ShowAnimated();
 
-        public void Show()
-        {
-            GroupView.Show();
-        }
+        public UniTask HideAnimated() => GroupView.HideAnimated();
 
-        public void Hide()
-        {
-            GroupView.Hide();
-        }
+        public void Show() => GroupView.Show();
 
-        public void Destroy()
-        {
-            Object.Destroy(GroupView.gameObject);
-        }
+        public void Hide() => GroupView.Hide();
+
+        public void Destroy() => Object.Destroy(GroupView.gameObject);
     }
 }
