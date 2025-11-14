@@ -13,6 +13,8 @@ namespace App.Scripts.Game.Scenes.Level.Installers.UI
     public class LevelSceneUIInstaller : MonoInstaller
     {
         [SerializeField] private LevelPanelView _levelPanelView;
+
+        [SerializeField] private Camera sceneCamera;
         
         public override void InstallBindings(ServiceContainer container)
         {
@@ -22,7 +24,7 @@ namespace App.Scripts.Game.Scenes.Level.Installers.UI
             
             var factoryList = new List<IFactory<PanelController>>
             {
-                new LevelPanelFactory(_levelPanelView, uiCanvas, panelManager)
+                new LevelPanelFactory(_levelPanelView, uiCanvas, panelManager, sceneCamera)
             };
 
             panelManager.SetFactories(factoryList);
